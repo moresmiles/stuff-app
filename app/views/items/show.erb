@@ -1,0 +1,7 @@
+<h1><%=@item.name%></h1>
+<form action="/boxes/items/<%=@item.id%>/edit">
+    <input type="submit" value="Edit this Item">
+</form>
+<form action="/moves/boxes/<%=@item.box_id%>">
+    <input type="submit" value="Back">
+</form>
