@@ -41,4 +41,38 @@ class BoxesController < ApplicationController
       redirect_if_not_logged_in
     end
   end
+
+  get '/moves/:id/boxes/edit' do
+    if logged_in?
+      @box = Box.find(params[:id])
+      erb :'/boxes/edit'
+    else
+      redirect_if_not_logged_in
+    end
+  end
+
+  patch '/moves/boxes/:id' do
+    if !params[:name].empty? && !params[:location].empty?
+      @box = Box.find(params[:id])
+      @box.update(name: params[:name], location: params[:location])
+      flash[:message] = "Box Updated"
+      redirect to "/moves/boxes/#{@box.id}"
+    else
+      flash[:message] = "Please don't leave blank fields"
+      redirect to "/moves/#{params[:id]}/boxes/edit"
+    end
+  end
+
+  delete '/moves/:id/boxes/delete' do
+   if logged_in?
+     #flash message -are you sure you want to delete this move?
+     #all associated boxes and items will be deleted as well
+     @box = Box.find(params[:id])
+     @box.destroy
+     redirect to "/moves/#{@box.move_id}/boxes"
+   else
+     redirect_if_not_logged_in
+   end
+ end
+
 end
