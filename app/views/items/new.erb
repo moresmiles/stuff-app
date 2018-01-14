@@ -1,0 +1,24 @@
+<div class="section login">
+  <div class="container">
+    <div class="one-half column">
+      <h1 class="section-heading"> Add an item to <%= @box.name %> Box </h1>
+
+<form action="/boxes/<%=@box.id%>/items" method="post">
+  <label> Item Name </label>
+    <input type="text" name="name" placeholder="Item" id="Item">
+
+
+    <input type="submit" id="submit" value="Add new Item">
+  </form>
+
+  <div class="row">
+    <div class="one-third column offset-by-one">
+      <form action="/moves/boxes/<%=@box.id%>">
+        <input class="button button-primary" type="submit" value="Back">
+      </form>
+    </div>
+  </div>
+
+  </div>
+  </div>
+  </div>
