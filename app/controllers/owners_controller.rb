@@ -76,5 +76,13 @@ class OwnersController < ApplicationController
    end
  end
 
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect_to_index_page
+    else
+      redirect_to_index_page
+    end
+  end
 
 end
