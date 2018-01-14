@@ -1,0 +1,20 @@
+<div class="section login">
+
+  <div class="container">
+    <div class="max-width">
+      <h1 class="section-heading"><strong><%=@box.name%></strong></h1>
+<% @box.items.each do |item| %>
+<h3><li><a href="/boxes/items/<%=item.id%>"><%= item.name %></a></li></h3>
+<%end%>
+
+<form action="/boxes/<%=@box.id%>/items/new">
+    <input type="submit" value="Add Items To Your Box">
+</form>
+<br>
+
+<form action="/moves/<%=@box.move_id%>/boxes">
+    <input type="submit" value="Back to all Boxes">
+</form>
+    </div>
+  </div>
+</div>

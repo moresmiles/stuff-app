@@ -32,4 +32,13 @@ class BoxesController < ApplicationController
       redirect to "/moves/boxes/#{@box.id}"
     end
   end
+
+  get '/moves/boxes/:id' do
+    if logged_in?
+      @box = Box.find(params[:id])
+      erb :'boxes/show'
+    else
+      redirect_if_not_logged_in
+    end
+  end
 end
