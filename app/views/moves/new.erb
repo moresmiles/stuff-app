@@ -1,0 +1,26 @@
+<div class="section login">
+  <div class="container">
+    <div class="row">
+        <h1 class="section-heading"> New Move </h1>
+
+        <form action="/moves" method="post">
+          <label> Origin </label>
+            <input class="u-full-width" type="text" placeholder="Origin" name="origin" id="origin">
+          <label> Destination </label>
+            <input class="u-full-width" type="text" placeholder="Destination" name="destination" id="destination">
+          <label> Date </label>
+            <input class="u-full-width" type="date" name="move_date" id="move_date">
+          <input type="submit" id="submit" value="submit">
+        </form>
+
+        <div class="row">
+          <div class="one-third column offset-by-one">
+            <form action="/owners/<%=current_user.id%>">
+              <input class="button button-primary" type="submit" value="Back">
+            </form>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
