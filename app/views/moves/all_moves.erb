@@ -1,0 +1,46 @@
+<div class="section login">
+
+  <div class="container">
+    <div class="max-width">
+        <h1 class="section-heading"><strong>Your Moves</strong></h1>
+      <br><br>
+      <table class="one-half column">
+
+        <thead>
+          <tr>
+            <th><strong>Move Date</strong></th>
+            <th><strong>Move Origin</strong></th>
+            <th><strong>Move Destination</strong></th>
+            <th><strong>Boxes From This Move</strong></th>
+            <th><strong>Edit This Move</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @moves.each do |move| %>
+          <tr>
+            <td><%= move.move_date %></td>
+            <td><%= move.origin %></td>
+            <td><%= move.destination %></td>
+            <td><a href="/moves/<%=move.id%>/boxes"</a> Boxes </td>
+            <td><a href="/moves/<%=move.id%>/edit"</a> Edit </td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="one-third column offset-by-one">
+          <form action="/owners/<%=current_user.id%>">
+            <input class="button button-primary" type="submit" value="Back">
+          </form>
+        </div>
+        <div class="one-third column offset-by-one">
+          <form action="/logout">
+            <input class="button button-primary" type="submit" value="Log Out">
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
