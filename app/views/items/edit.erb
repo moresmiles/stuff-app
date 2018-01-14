@@ -1,0 +1,19 @@
+<h1> Edit Item</h1>
+<form action="/boxes/items/<%=@item.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="name" placeholder="Item Name">
+
+  <input type="submit" id="submit" value="Update Item">
+</form>
+<br><br>
+<button onclick="goBack()">Go Back</button>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+<br>
+<form action="/boxes/items/<%=@item.id%>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete Item</button>
+</form>
