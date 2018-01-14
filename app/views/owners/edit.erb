@@ -1,0 +1,31 @@
+<div class="section login">
+  <div class="container">
+    <div class="row">
+      <div class="one-half column offset-by-three">
+        <h1 class="section-heading"> Update Account </h1>
+
+<form action="/owners/<%=current_user.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="username" placeholder="Username" id="username">
+  <input type="text" name="email" placeholder="Email "id="email">
+  <input type="text" name="password" placeholder="Password" id="password">
+
+  <input type="submit" id="submit" value="Update Account">
+</form>
+
+<br><br>
+
+<form action="/owners/<%= current_user.id %>">
+    <input class="button" type="submit" value="Back">
+</form>
+
+<form action="/owners/<%= current_user.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete Acount</button>
+</form>
+
+</div>
+</div>
+
+</div>
+</div>

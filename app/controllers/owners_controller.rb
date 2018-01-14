@@ -9,7 +9,6 @@ class OwnersController < ApplicationController
   end
 
   post '/signup' do
-    # NEEDS Flash Error Message for if Username or Email is already is use
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       flash[:alert] = "Pleae don't leave blank content"
       redirect to '/signup'
@@ -39,6 +38,27 @@ class OwnersController < ApplicationController
       redirect_if_not_logged_in
     end
   end
+
+  get '/owners/:id/edit' do
+   if logged_in?
+      erb :'/owners/edit'
+   else
+     redirect_if_not_logged_in
+   end
+ end
+
+ patch '/owners/:id' do
+   if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+     @owner = Owner.find(params[:id])
+     @owner.update(username: params[:username], email: params[:email], password: params[:password])
+     flash[:message] = "Account Updated"
+     redirect to "/owners/#{@owner.id}"
+   else
+     flash[:message] = "Please don't leave blank content"
+     redirect to "/owners/#{params[:id]}/edit"
+   end
+ end
+
   get '/owners/:id' do
     if logged_in?
       erb :'/owners/show'
@@ -46,4 +66,15 @@ class OwnersController < ApplicationController
       redirect_if_not_logged_in
     end
   end
+
+  delete '/owners/:id/delete' do
+   if logged_in?
+     current_user.delete
+     redirect to "/logout"
+   else
+     redirect_if_not_logged_in
+   end
+ end
+
+
 end
