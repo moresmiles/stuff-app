@@ -1,4 +1,4 @@
-#Stuff
+# Stuff
 
 Stuff is a sinatra web application created to keep track of your stuff, when you move:
 
