@@ -39,4 +39,11 @@ class OwnersController < ApplicationController
       redirect_if_not_logged_in
     end
   end
+  get '/owners/:id' do
+    if logged_in?
+      erb :'/owners/show'
+    else
+      redirect_if_not_logged_in
+    end
+  end
 end
