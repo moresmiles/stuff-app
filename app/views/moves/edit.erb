@@ -1,0 +1,22 @@
+<h1> Update Move </h1>
+
+<form action="/moves/<%=current_user.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="origin" placeholder="Origin">
+  <input type="text" name="destination" placeholder="Destination">
+  <input type="date" name="move_date" placeholder="Move Date">
+
+  <input type="submit" id="submit" value="Update Move">
+</form>
+<br><br>
+<script>
+function goBack() {
+    window.history.back()
+}
+</script>
+<button onclick="goBack()">Go Back</button>
+<br>
+<form action="/moves/<%= current_user.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete Move</button>
+</form>

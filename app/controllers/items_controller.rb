@@ -34,4 +34,37 @@ class ItemsController < ApplicationController
       redirect to '/moves/:id/items/new'
     end
   end
+
+  get '/boxes/items/:id/edit' do
+    if logged_in?
+      @item = Item.find(params[:id])
+      erb :'items/edit'
+    else
+      redirect_if_not_logged_in
+    end
+  end
+
+  patch '/boxes/items/:id' do
+    if !params[:name].empty?
+      @item = Item.find(params[:id])
+      @item.update(name: params[:name])
+      flash[:message] = "Item Updated"
+      redirect to "/boxes/items/#{@item.id}"
+    else
+      flash[:message] = "Please don't leave blank field"
+      redirect to "/boxes/items/#{@item.id}/edit"
+    end
+  end
+
+  delete '/boxes/items/:id/delete' do
+    if logged_in?
+      @item = Item.find(params[:id])
+      @item.delete
+      redirect to "/moves/boxes/#{@item.box_id}"
+    else
+      redirect_if_not_logged_in
+    end
+  end
+
+
 end
