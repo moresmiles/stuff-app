@@ -1,0 +1,42 @@
+<div class="section login">
+
+  <div class="container">
+    <div class="max-width">
+      <h1 class="section-heading"><strong>All boxes from <%= @move.move_date %> move From <%= @move.origin %> to <%= @move.destination%></strong></h1>
+      <br><br>
+      <table class="one-half column">
+        <thead>
+          <tr>
+            <th><strong>Box Name</strong></th>
+            <th><strong>Box Location</strong></th>
+            <th><strong>Contents</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @move.boxes.each do |box|%>
+          <tr>
+            <td><%= box.name %></td>
+            <td><%= box.location %></td>
+            <td><a href="/moves/boxes/<%=box.id%>">Contents</a></td>
+            <td><a href="/moves/<%=box.id%>/boxes/edit">Edit this Box</a></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="one-third column offset-by-one">
+          <form action="/moves/<%= @move.id %>/boxes/new">
+            <input type="submit" value="Make a new box">
+          </form>
+        </div>
+        <div class="one-third column offset-by-one">
+          <form action="/moves">
+            <input type="submit" value="Back">
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
