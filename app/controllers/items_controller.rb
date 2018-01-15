@@ -28,6 +28,7 @@ class ItemsController < ApplicationController
       @box.items << @item
       @box.save
       @owner.save
+      flash[:message] = "Item Created"
       redirect to "/moves/boxes/#{@box.id}"
     else
       flash[:alert] = "Pleae don't leave blank content"

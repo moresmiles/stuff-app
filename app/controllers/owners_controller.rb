@@ -15,7 +15,7 @@ class OwnersController < ApplicationController
     else
       @owner = Owner.create(username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = @owner.id
-      flash[:alert] = "It's time to start moving"
+      flash[:message] = "It's time to start moving"
       redirect_to_owner_page
     end
   end
@@ -34,7 +34,7 @@ class OwnersController < ApplicationController
       session[:user_id] = @owner.id
       redirect_to_owner_page
     else
-      flash[:message] = "We can't find you, Please try again"
+      flash[:alert] = "We can't find you, Please try again"
       redirect_if_not_logged_in
     end
   end
@@ -54,7 +54,7 @@ class OwnersController < ApplicationController
      flash[:message] = "Account Updated"
      redirect to "/owners/#{@owner.id}"
    else
-     flash[:message] = "Please don't leave blank content"
+     flash[:alert] = "Please don't leave blank content"
      redirect to "/owners/#{params[:id]}/edit"
    end
  end
