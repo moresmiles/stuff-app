@@ -24,7 +24,7 @@ class MovesController < ApplicationController
       @move = Move.create(owner_id: @owner.id, origin: params[:origin], destination: params[:destination], move_date: params[:move_date])
       @owner.moves << @move
       @owner.save
-      redirect to "/moves/#{@move.id}"
+      redirect to "/moves"
     end
   end
 
