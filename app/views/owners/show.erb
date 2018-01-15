@@ -1,28 +1,22 @@
 <div class="section login">
   <div class="container">
     <div class="row">
-      <div class="one-half column">
+      <div class="one-half column offset-by-three">
 
         <h1 class="section-heading"> Welcome <%= current_user.username%>! </h1>
-
-        <div class="row">
-          <div class="column">
-            <a href="/moves/new"> New Move</a>
-          </div>
-        </div>
         <br>
-
         <div class="row">
-          <div class="column">
-            <a href="/moves"> Previous Moves</a>
+          <div class="one-third column offset-by-one">
+            <a class="button button-primary" href="/moves/new"> New Move</a>
           </div>
+          <div class="one-third column offset-by-two">
+        <a class="button button-primary" href="/moves"> Previous Moves</a>
         </div>
-      <br>
-
+        </div>
+            <br><br>
         <form action="/owners/<%= current_user.id %>/edit">
           <input class="button" type="submit" value="Edit Account">
         </form>
-        <br>
         <form action="/logout">
           <input class="button "type="submit" value="Log Out">
         </form>
