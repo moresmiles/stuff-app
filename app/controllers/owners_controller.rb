@@ -16,7 +16,7 @@ class OwnersController < ApplicationController
       @owner = Owner.create(username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = @owner.id
       flash[:message] = "It's time to start moving"
-      redirect_to_owner_page
+      redirect to "/owners/#{@owner.id}"
     end
   end
 
@@ -32,10 +32,10 @@ class OwnersController < ApplicationController
     @owner = Owner.find_by(email: params[:email])
     if @owner && @owner.authenticate(params[:password])
       session[:user_id] = @owner.id
-      redirect_to_owner_page
+      redirect to "/owners/#{@owner.id}"
     else
       flash[:alert] = "We can't find you, Please try again"
-      redirect_if_not_logged_in
+      redirect_to_login_page
     end
   end
 
@@ -96,9 +96,9 @@ end
   get '/logout' do
     if logged_in?
       session.clear
-      redirect_to_index_page
+      redirect_to_login_page
     else
-      redirect_to_index_page
+      redirect_to_login_page
     end
   end
 
