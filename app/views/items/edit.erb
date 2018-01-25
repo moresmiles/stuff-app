@@ -1,7 +1,8 @@
 <h1> Edit Item</h1>
 <form action="/boxes/items/<%=@item.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="text" name="name" placeholder="Item Name">
+  <label> Current Item Name </lable>
+  <input type="text" name="name" value="<%=@item.name%>">
 
   <input type="submit" id="submit" value="Update Item">
 </form>

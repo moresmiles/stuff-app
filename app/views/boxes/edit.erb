@@ -1,8 +1,10 @@
 <h1> Edit Box</h1>
 <form action="/moves/boxes/<%=@box.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="text" name="name" placeholder="Box Name">
-  <input type="text" name="location" placeholder="Location">
+  <label> Current Box Name </label>
+  <input type="text" name="name" value="<%=@box.name%>"><br>
+  <label> Current Box Location </label>
+  <input type="text" name="location" value="<%=@box.location%>"><br>
 
   <input type="submit" id="submit" value="Update Box">
 </form>

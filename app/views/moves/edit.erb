@@ -1,10 +1,13 @@
 <h1> Update Move </h1>
 
-<form action="/moves/<%=current_user.id%>" method="post">
+<form action="/moves/<%=@move.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="text" name="origin" placeholder="Origin">
-  <input type="text" name="destination" placeholder="Destination">
-  <input type="date" name="move_date" placeholder="Move Date">
+  <label> Current Origin </label>
+  <input type="text" name="origin" value="<%= @move.origin %>"><br>
+  <label> Current Destination </label>
+  <input type="text" name="destination" value="<%= @move.destination %>"><br>
+  <label> Current Move Date </label>
+  <input type="date" name="move_date" value="<%= @move.move_date %>"><br>
 
   <input type="submit" id="submit" value="Update Move">
 </form>
@@ -16,7 +19,7 @@ function goBack() {
 </script>
 <button onclick="goBack()">Go Back</button>
 <br>
-<form action="/moves/<%= current_user.id %>/delete" method="post">
+<form action="/moves/<%= @move.id %>/delete" method="post">
     <input type="hidden" id="hidden" name="_method" value="DELETE">
     <button type="submit">Delete Move</button>
 </form>

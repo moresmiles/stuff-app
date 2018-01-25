@@ -6,9 +6,12 @@
 
 <form action="/owners/<%=current_user.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="text" name="username" placeholder="Username" id="username">
-  <input type="text" name="email" placeholder="Email "id="email">
-  <input type="text" name="password" placeholder="Password" id="password">
+  <label> Current Username </label>
+  <input type="text" name="username" value="<%=@owner.username%>" id="username"><br>
+  <label> Current Email </label>
+  <input type="text" name="email" value="<%=@owner.email%>"id="email"><br>
+  <label> Password (not shown, obviously) </label>
+  <input type="text" name="password" placeholder="password" id="password"><br>
 
   <input type="submit" id="submit" value="Update Account">
 </form>
