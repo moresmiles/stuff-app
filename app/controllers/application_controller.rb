@@ -24,10 +24,12 @@ class ApplicationController < Sinatra::Base
 
    def logged_in?
      !!session[:user_id]
+     !!current_user
    end
 
    def current_user
      Owner.find(session[:user_id])
+    @current_user ||= Owner.find_by(:id => session[:user_id]) if session[:user_id]
    end
 
    def current_move
@@ -37,6 +39,12 @@ class ApplicationController < Sinatra::Base
    def redirect_if_not_logged_in
      if !logged_in?
        redirect "/login"
+   def current_box
+     current_move.boxes.find_by(params[:id])
+   end
+
+   def redirect_to_login_page
+       redirect to "/login"
      end
    end
 
