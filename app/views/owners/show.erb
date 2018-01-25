@@ -7,10 +7,10 @@
         <br>
         <div class="row">
           <div class="one-third column offset-by-one">
-            <a class="button button-primary" href="/moves/new"> New Move</a>
+            <a class="button button-primary" href="/moves/<%= current_user.id %>/new"> New Move</a>
           </div>
           <div class="one-third column offset-by-two">
-        <a class="button button-primary" href="/moves"> Previous Moves</a>
+        <a class="button button-primary" href="/moves/<%= current_user.id %>"> Previous Moves</a>
         </div>
         </div>
             <br><br>
