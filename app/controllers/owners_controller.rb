@@ -2,7 +2,7 @@ class OwnersController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-      erb :'owners/signup'
+      erb :'owners/signup', :layout => :'not_logged_in_layout'
     else
       redirect_to_owner_page
     end
@@ -24,7 +24,7 @@ class OwnersController < ApplicationController
     if logged_in?
       redirect_to_owner_page
     else
-      erb :'/owners/login'
+      erb :'/owners/login', :layout => :'not_logged_in_layout'
     end
   end
 

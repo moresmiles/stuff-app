@@ -13,22 +13,20 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    erb :index, :layout => :'not_logged_in_layout' #=> Log In Page
   end
 
-  get '/practice' do
-    erb :practice
+  error ActiveRecord::RecordNotFound do
+    redirect back
   end
 
   helpers do
 
    def logged_in?
-     !!session[:user_id]
      !!current_user
    end
 
    def current_user
-     Owner.find(session[:user_id])
     @current_user ||= Owner.find_by(:id => session[:user_id]) if session[:user_id]
    end
 
@@ -36,9 +34,6 @@ class ApplicationController < Sinatra::Base
      current_user.moves.find_by(params[:id])
    end
 
-   def redirect_if_not_logged_in
-     if !logged_in?
-       redirect "/login"
    def current_box
      current_move.boxes.find_by(params[:id])
    end
@@ -55,7 +50,6 @@ class ApplicationController < Sinatra::Base
    def redirect_to_owner_page
      redirect to "/owners/:id"
    end
+
+
  end
-
-
-end
