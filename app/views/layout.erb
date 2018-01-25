@@ -19,19 +19,50 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="stylesheets/css/custom.css"/>
-  <link rel="stylesheet" href="stylesheets/css/normalize.css"/>
-  <link rel="stylesheet" href="stylesheets/css/skeleton.css"/>
+  <link rel="stylesheet" type="text/css" href="<%= url("/style.css")%>">
 
   <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="../../dist/images/favicon.png">
-
 </head>
+
+<div class="container">
+
+      <nav>
+        <ul>
+          <li><a href="/owners/<%= current_user.id %>">Home Page</a></li>
+          <li><a href="/moves/<%= current_user.id %>">All Moves</a></li>
+
+          <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Moves</a>
+            <div class="dropdown-content">
+              <% current_user.moves.each do |move| %>
+              <a href="/moves/<%= move.id %>/boxes"> Move From <%=move.origin%> To <%=move.destination%></a>
+                <%end%>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Boxes</a>
+              <div class="dropdown-content">
+                <% current_user.boxes.each do |box| %>
+                <a href="/moves/boxes/<%= box.id %>"><%=box.name%> (<%=box.move.origin%> To <%=box.move.destination%>)</a>
+                <%end%>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Items</a>
+              <div class="dropdown-content">
+                <% current_user.items.each do |item| %>
+                <a href="/boxes/items/<%= item.id %>"><%=item.name%> (<%=item.box.move.origin%> To <%=item.box.move.destination%>)</a>
+                <%end%>
+              </div>
+            </li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+
+  </div>
 
 <body>
 <% flash.keys.each do |type| %>
@@ -42,10 +73,6 @@
 <% end %>
       <%= yield %>
 
-<script src="../../../assets/js/jquery-1.11.1.min.js"></script>
-<script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../../assets/js/jquery.backstretch.min.js"></script>
-<script src="../../../assets/js/scripts.js"></script>
 
 </body>
 </html>
