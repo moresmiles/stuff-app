@@ -40,39 +40,56 @@ class OwnersController < ApplicationController
   end
 
   get '/owners/:id/edit' do
-   if logged_in?
-      erb :'/owners/edit'
-   else
-     redirect_if_not_logged_in
-   end
- end
+    if !logged_in?
+      redirect to '/login'
+    else
+      @owner = Owner.find(params[:id])
+        if @owner == current_user
+            erb :'/owners/edit'
+        else
+          flash[:alert] = "Sorry, you do not have access to that page"
+          redirect to "owners/#{current_user.id}/edit"
+      end
+    end
+  end
 
  patch '/owners/:id' do
    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
      @owner = Owner.find(params[:id])
-     @owner.update(username: params[:username], email: params[:email], password: params[:password])
-     flash[:message] = "Account Updated"
-     redirect to "/owners/#{@owner.id}"
+     if @owner == current_user
+       @owner.update(username: params[:username], email: params[:email], password: params[:password])
+       flash[:message] = "Account Updated"
+       redirect to "/owners/#{@owner.id}"
    else
      flash[:alert] = "Please don't leave blank content"
      redirect to "/owners/#{params[:id]}/edit"
    end
  end
+end
 
   get '/owners/:id' do
-    if logged_in?
+    if !logged_in?
+      redirect_to_login_page
+    else
+      @owner = Owner.find(params[:id])
+      if @owner == current_user
       erb :'/owners/show'
     else
-      redirect_if_not_logged_in
+      flash[:alert] = "Please only access your pages"
+      redirect to "owners/#{current_user.id}"
+    end
     end
   end
 
   delete '/owners/:id/delete' do
    if logged_in?
-     current_user.delete
-     redirect to "/logout"
-   else
-     redirect_if_not_logged_in
+     @owner = Owner.find(params[:id])
+     if @owner == current_user
+       current_user.delete
+       redirect to "/logout"
+     else
+       redirect_to '/login'
+     end
    end
  end
 
