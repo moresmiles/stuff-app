@@ -10,7 +10,7 @@ class MovesController < ApplicationController
           erb :'/moves/all_moves'
       else
         flash[:alert] = "Please only access your move page"
-        redirect to "moves/#{current_user.id}"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -24,7 +24,7 @@ class MovesController < ApplicationController
           erb :'/moves/new'
       else
         flash[:alert] = "Please only access your new move page"
-        redirect to "moves/#{current_user.id}/new"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -47,11 +47,11 @@ class MovesController < ApplicationController
       redirect_to_login_page
     else
       @move = Move.find(params[:id])
-      if @move == current_move
+      if @move.owner == current_user
         erb :'/moves/edit'
     else
       flash[:alert] = "Please only edit your page"
-        redirect to "moves/#{current_move.id}/edit"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -68,7 +68,7 @@ class MovesController < ApplicationController
         redirect to "/moves#{@move.owner.id}"
       else
         flash[:alert] = "Please only edit your page"
-        redirect_to_index_page
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -83,7 +83,7 @@ class MovesController < ApplicationController
         redirect to "/moves/#{current_user.id}"
       else
         flash[:alert] = "Please only edit your page"
-        redirect to "/moves/#{current_user.id}"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end

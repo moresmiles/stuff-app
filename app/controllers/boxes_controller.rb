@@ -9,7 +9,7 @@ class BoxesController < ApplicationController
       erb :'/boxes/boxes'
     else
       flash[:alert] = "Please only access your pages"
-      redirect to "/moves/#{current_move.id}/boxes"
+      redirect to "/owners/#{current_user.id}"
     end
   end
 end
@@ -23,7 +23,7 @@ end
         erb :'boxes/new'
     else
       flash[:alert] = "Please only access your pages"
-      redirect to "/moves/#{current_move.id}/boxes"
+      redirect to "/owners/#{current_user.id}"
     end
   end
 end
@@ -34,7 +34,7 @@ end
       redirect to  "/moves/#{params[:id]}/boxes/new"
     else
       @move = Move.find(params[:id])
-      if @move == current_move
+      if @move.owner == current_user
         @box = Box.create(move_id: @move.id, name: params[:name], location: params[:location])
         @move.boxes << @box
         @move.save
@@ -42,7 +42,7 @@ end
       redirect to "/moves/boxes/#{@box.id}"
     else
       flash[:alert] = "Please only access your pages"
-      redirect_to_index_page
+      redirect to "/owners/#{current_user.id}"
     end
   end
 end
@@ -52,11 +52,11 @@ end
       redirect_to_login_page
     else
       @box = Box.find(params[:id])
-      if @box.move == current_move
+      if @box.move.owner == current_user
         erb :'boxes/show'
       else
         flash[:alert] = "Please only access your pages"
-        redirect to "/moves/boxes#{@box.id}"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -66,11 +66,11 @@ end
       redirect_to_login_page
     else
       @box = Box.find(params[:id])
-      if @box.move == current_move
+      if @box == current_box
           erb :'/boxes/edit'
       else
         flash[:alert] = "Please only access your pages"
-        redirect to "/moves/boxes#{@box.id}"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -81,13 +81,13 @@ end
       redirect to "/moves/#{params[:id]}/boxes/edit"
     else
       @box = Box.find(params[:id])
-      if @box.move == current_move
+      if @box.move.owner == current_user
         @box.update(name: params[:name], location: params[:location])
         flash[:message] = "Box Updated"
         redirect to "/moves/boxes/#{@box.id}"
       else
         flash[:alert] = "Please only access your pages"
-        redirect_to_index_page
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -97,12 +97,12 @@ end
      redirect_to_login_page
    else
      @box = Box.find(params[:id])
-     if @box.move == current_move
+     if @box.move.owner == current_user
        @box.destroy
        redirect to "/moves/#{current_move.id}/boxes"
      else
       flash[:alert] = "Please only access your pages"
-      redirect_to_index_page
+      redirect to "/owners/#{current_user.id}"
       end
     end
   end

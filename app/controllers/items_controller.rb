@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
       erb :'/items/show'
     else
       flash[:alert] = "Please only access your pages"
-      redirect to "moves/boxes/#{current_box.id}"
+      redirect to "/owners/#{current_user.id}"
     end
   end
 end
@@ -23,7 +23,7 @@ end
         erb :'/items/new'
       else
         flash[:alert] = "Please only access your pages"
-        redirect to "boxes/#{current_box.id}/items/new"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -42,7 +42,7 @@ end
         redirect to "/moves/boxes/#{@box.id}"
       else
         flash[:alert] = "Please only access your pages"
-        redirect to "boxes/#{current_box.id}/items/new"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -56,7 +56,7 @@ end
       erb :'items/edit'
       else
         flash[:alert] = "Please only access your pages"
-        redirect to "/moves/boxes/#{current_box.id}"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -73,7 +73,7 @@ end
         redirect to "/boxes/items/#{@item.id}"
       else
         flash[:alert] = "Please only access your pages"
-        redirect to "/moves/boxes/#{current_box.id}"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
@@ -88,7 +88,7 @@ end
         redirect to "/moves/boxes/#{@item.box_id}"
       else
         flash[:alert] = "Please only access your pages"
-        redirect to "/moves/boxes/#{current_box.id}"
+        redirect to "/owners/#{current_user.id}"
       end
     end
   end
