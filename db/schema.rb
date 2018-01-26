@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103103518) do
+ActiveRecord::Schema.define(version: 20180124080618) do
 
   create_table "boxes", force: :cascade do |t|
-    t.integer "owner_id"
     t.integer "move_id"
     t.string  "name"
     t.string  "location"
@@ -22,8 +21,6 @@ ActiveRecord::Schema.define(version: 20180103103518) do
 
   create_table "items", force: :cascade do |t|
     t.integer "box_id"
-    t.integer "move_id"
-    t.integer "owner_id"
     t.string  "name"
   end
 
